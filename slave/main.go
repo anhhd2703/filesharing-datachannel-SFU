@@ -47,18 +47,18 @@ func main() {
 	c.OnDataChannel = func(dc *webrtc.DataChannel) {
 		log.Errorf("-------------------------------=%v", dc.Label())
 		dc.OnOpen(func() {
-			buffArray := []byte{}
+			// buffArray := []byte{}
 			dc.OnMessage(func(msg webrtc.DataChannelMessage) {
 				if msg.IsString == true {
 					log.Errorf("-------------------------------=%v", string(msg.Data))
-					// number, _ := strconv.ParseUint(string(msg.Data), 10, 64)
-					// util.Combine(number)
-					util.WriteToFile(buffArray)
+					number, _ := strconv.ParseUint(string(msg.Data), 10, 64)
+					util.Combine(number)
+					// util.WriteToFile(buffArray)
 				} else {
 					var data proto.Data
 					json.Unmarshal(msg.Data, &data)
-					buffArray = append(buffArray, data.Buff...)
-					// util.WriteToLocal(msg.Data)
+					// buffArray = append(buffArray, data.Buff...)
+					util.WriteToLocal(&data)
 				}
 
 			})

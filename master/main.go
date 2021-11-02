@@ -47,7 +47,7 @@ func main() {
 			go func() {
 				log.Errorf("-------------OnMessage------------------")
 				// util.Detach(dc)
-				util.DetachGoRoutine()
+				util.DetachGoRoutine(dc)
 			}()
 			dc.OnOpen(func() {
 				dc.OnMessage(onMessage)
